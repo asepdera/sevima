@@ -67,6 +67,22 @@
             </div>
         </div>
     </div>
+    @error('name')
+        <div class="alert alert-danger">{{ $message }}</div>
+        
+    @enderror
+    @error('description')
+        <div class="alert alert-danger">{{ $message }}</div>
+        
+    @enderror
+    @error('file')
+        <div class="alert alert-danger">{{ $message }}</div>
+        
+    @enderror
+    @error('status')
+        <div class="alert alert-danger">{{ $message }}</div>
+        
+    @enderror
         <div
           class="modal fade text-start"
           id="inlineForm"
@@ -80,17 +96,48 @@
                 <h4 class="modal-title" id="myModalLabel33">Add Assignment</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <form action="{{url('/teacher/soal/add')}}" method="POST">
+              <form action="{{url('/teacher/soal/add')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
-                  <label>Name: </label>
-                  <div class="mb-1">
-                    <input type="text" placeholder="Class Name" class="form-control" name="name" />
-                  </div>
-                  <label>Name: </label>
-                  <div class="mb-1">
-                    <input type="text" placeholder="Class Name" class="form-control" name="name" />
-                  </div>
+                    <label>Name: </label>
+                    <input type="hidden" name="id" id="id">
+                    <div class="mb-1">
+                      <input type="text" placeholder="Class Name" class="form-control" name="name" id="name" />
+                    </div>
+                    <label for="">Status: </label>
+                    <div class="mb-1">
+                      <select name="status" id="status" class="form-select">
+                        <option value="published">Published</option>
+                        <option value="closed">Closed</option>
+                      </select>
+                    </div>
+                    <label for="">Class: </label>
+                    <div class="mb-1">
+                      <select name="kelas" id="kelas" class="form-select">
+                        @foreach ($kelas as $k)
+                            <option value="{{$k->id}}">{{$k->name}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <label for="">Subject: </label>
+                    <div class="mb-1">
+                      <select name="subject" id="subjectt" class="form-select">
+                        @foreach ($subject as $s)
+                            <option value="{{$s->id}}">{{$s->name}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <label for="">File: </label>
+                    <div class="mb-1">
+                      <input type="file" name="files" id="files" class="form-select">
+                      <div class="col-12" id="prev-con">
+                          <img alt="prev" id="prev" width="100%">
+                      </div>
+                    </div>
+                    <label for="">Description: </label>
+                    <div class="mb-1">
+                      <textarea id="descr" name="description" class="form-control"></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                   <input type="submit" class="btn btn-primary" data-bs-dismiss="modal" value="Add">
@@ -112,7 +159,7 @@
                 <h4 class="modal-title" id="myModalLabel33">Edit Assignment</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <form action="{{url('/teacher/kelas/update/')}}" method="POST">
+              <form action="{{url('/teacher/soal/update/')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                   <label>Name: </label>
@@ -137,14 +184,14 @@
                   </div>
                   <label for="">File: </label>
                   <div class="mb-1">
-                    <input type="file" name="subject" id="file" class="form-select">
+                    <input type="file" name="files" id="file" class="form-select">
                     <div class="col-12" id="prev-con">
                         <img alt="prev" id="prev" width="100%">
                     </div>
                   </div>
                   <label for="">Description: </label>
                   <div class="mb-1">
-                    <textarea ></textarea>
+                    <textarea id="desc" name="description" class="form-control"></textarea>
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -177,6 +224,7 @@
                     $('#edit #subject').val(data.work[0].subject_id);
                     $('#edit #classs').val(data.work[0].class_id);
                     $('#edit #prev-con #prev').attr('src',"{{asset('upload/')}}/"+data.work[0].file);
+                    $('#edit #desc').val(data.work[0].description);
                     $('#edit').modal('show');
                 }
             });

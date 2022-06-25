@@ -94,7 +94,7 @@ class TeacherController extends Controller
 
         $kelas = Kelas::find(request('id'));
         $kelas->name = request('name');
-        $kelas->save();
+        $kelas->update();
         return redirect('/teacher/kelas');
     }
 
@@ -103,25 +103,46 @@ class TeacherController extends Controller
             ->where('works.user_id', \Auth::user()->id)
             ->select('works.id', 'works.name', 'works.status', 'class.name as class_name', 'works.created_at',)
             ->get();
+        $kelas = Kelas::where('user_id', \Auth::user()->id)->get();
+        $subject = Subject::where('user_id', \Auth::user()->id)->get();
+        $data['kelas'] = $kelas;
+        $data['subject'] = $subject;
         return view('teacher/soal', $data);
     }
 
     public function add_soal(){
         $validation = $this->validate(request(), [
             'name' => 'required|string|max:255',
-            'class_id' => 'required|integer',
+            'description' => 'required|string',
+            'files' => 'required|max:10000',
+            'status' => 'required|string',
         ]);
-
+        
         $work = new Work;
         $work->name = request('name');
         $work->user_id = \Auth::user()->id;
-        $work->class_id = request('class_id');
+        $work->class_id = request('kelas');
+        $work->subject_id = request('subject');
+        $work->status = request('status');
+        $work->description = request('description');
+        
+        $file = request()->file('files');
+        $file_name = time().'.'.$file->extension();
+        
+        $file->move(public_path('/upload'), $file_name);
+        $work->file = $file_name;
+
         $work->save();
         return redirect('/teacher/soal');
     }
 
-    public function delete_soal($id){
+    public function soal_delete($id){
         $work = Work::find($id);
+        $file = $work->file;
+
+        if(file_exists(public_path('/upload/'.$file))){
+            unlink(public_path('/upload/'.$file));
+        }
         $work->delete();
         return redirect('/teacher/soal');
     }
@@ -139,6 +160,7 @@ class TeacherController extends Controller
                     'class.name as class_name',
                     'works.created_at',
                     'works.file',
+                    'works.description',
                     'subjects.name as subject_name',
                     'subjects.id as subject_id'
                 )
@@ -152,5 +174,78 @@ class TeacherController extends Controller
             return response()->json($e);
         }
         return response()->json($data);
+    }
+
+    public function soal_update(){
+        $validation = $this->validate(request(), [
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'files' => 'required|max:10000',
+            'status' => 'required|string',
+        ]);
+        
+        $work = Work::find(request('id'));
+        //delete old file
+        $file = $work->file;
+
+        if(file_exists(public_path('/upload/'.$file))){
+            unlink(public_path('/upload/'.$file));
+        }
+        $work->name = request('name');
+        $work->user_id = \Auth::user()->id;
+        $work->class_id = request('kelas');
+        $work->subject_id = request('subject');
+        $work->status = request('status');
+        $work->description = request('description');
+        
+        $file = request()->file('files');
+        $file_name = time().'.'.$file->extension();
+        
+        $file->move(public_path('/upload'), $file_name);
+        $work->file = $file_name;
+
+        $work->update();
+        return redirect('/teacher/soal');
+    }
+
+    public function subject(){
+        $data['subject'] = Subject::where('user_id', \Auth::user()->id)->get();
+        return view('teacher/subject', $data);
+    }
+    public function update_subject(){
+        $validation = $this->validate(request(), [
+            'name' => 'required|string|max:255',
+        ]);
+
+        $subject = Subject::find(request('id'));
+        $subject->name = request('name');
+        $subject->update();
+        return redirect('/teacher/subject');
+    }
+    public function delete_subject($id){
+        $subject = Subject::find($id);
+        $subject->delete();
+        return redirect('/teacher/subject');
+    }
+
+    public function edit_subject($id){
+        try {
+            $subject = Subject::find($id);
+            $data['subject'] = $subject;
+        } catch (\Exception $e) {
+            return response()->json($e);
+        }
+        return response()->json($data);
+    }
+    public function add_subject(){
+        $validation = $this->validate(request(), [
+            'name' => 'required|string|max:255',
+        ]);
+
+        $subject = new Subject;
+        $subject->name = request('name');
+        $subject->user_id = \Auth::user()->id;
+        $subject->save();
+        return redirect('/teacher/subject');
     }
 }

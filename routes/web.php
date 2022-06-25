@@ -25,17 +25,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'is_teacher:teacher', 'prefix' => 'teacher'], function () {
         Route::get('/', [TeacherController::class, 'dashboard']);
         Route::get('/soal', [TeacherController::class, 'soal']);
-        Route::get('/soal/{id}', [TeacherController::class, 'soal_detail']);
-        Route::post('/soal/create', [TeacherController::class, 'soal_store']);
-        Route::post('/soal/update/{id}', [TeacherController::class, 'soal_update']);
-        Route::post('/soal/delete/{id}', [TeacherController::class, 'soal_delete']);
+        Route::post('/soal/add', [TeacherController::class, 'add_soal']);
+        Route::post('/soal/update/', [TeacherController::class, 'soal_update']);
+        Route::delete('/soal/delete/{id}', [TeacherController::class, 'soal_delete']);
         Route::get('/students', [TeacherController::class, 'students']);
         Route::get('/kelas', [TeacherController::class, 'kelas']);
         Route::post('/kelas/add', [TeacherController::class, 'add_kelas']);
+        Route::post('/subject/add', [TeacherController::class, 'add_subject']);
         Route::post('/kelas/update/', [TeacherController::class, 'update_kelas']);
+        Route::post('/subject/update/', [TeacherController::class, 'update_subject']);
         Route::get('/kelas/edit/{id}', [TeacherController::class, 'edit_kelas']);
         Route::delete('/kelas/delete/{id}', [TeacherController::class, 'delete_kelas']);
+        Route::delete('/subject/delete/{id}', [TeacherController::class, 'delete_subject']);
         Route::get('/soal/edit/{id}', [TeacherController::class, 'edit_soal']);
+        Route::get('/subject/edit/{id}', [TeacherController::class, 'edit_subject']);
+        Route::get('/subject',[TeacherController::class,'subject']);
     });
     Route::group(['middleware' => 'is_teacher:student', 'prefix' => 'student'], function () {
         Route::get('/', [StudentsController::class, 'dashboard']);
