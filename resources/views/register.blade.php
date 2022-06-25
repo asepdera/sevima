@@ -6,8 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
-    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="description" content="Ujian Digital">
+    <meta name="keywords" content="Ujian, Exam, Digital, Student, Teacher">
     <meta name="author" content="PIXINVENT">
     <title>Register Page - Ujian Digital</title>
     <link rel="apple-touch-icon" href={{asset("app-assets/images/ico/apple-icon-120.png")}}>
@@ -32,11 +32,6 @@
     <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/plugins/forms/form-validation.css")}}>
     <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/pages/authentication.css")}}>
     <!-- END: Page CSS-->
-
-    <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
-    <!-- END: Custom CSS-->
-
 </head>
 <!-- END: Head-->
 
@@ -77,7 +72,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <h2 class="brand-text text-primary ms-1">Vuexy</h2>
+                            <h2 class="brand-text text-primary ms-1">Ujian Digital</h2>
                         </a>
                         <!-- /Brand logo-->
                         <!-- Left Text-->
@@ -89,21 +84,45 @@
                         <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                             <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
                                 <h2 class="card-title fw-bold mb-1">Adventure starts here 🚀</h2>
-                                <p class="card-text mb-2">Make your exam management easy and fun!</p>
-                                <form class="auth-register-form mt-2" action="{{url('/register')}}" method="POST">
+                                <p class="card-text mb-2">Make your exam easy and fun!</p>
+                                <form class="auth-register-form mt-2" action="{{url('/register_action')}}" method="POST">
+                                    @csrf
                                     <div class="mb-1">
                                         <label class="form-label" for="register-username">Username</label>
-                                        <input class="form-control" id="register-username" type="text" name="register-username" placeholder="johndoe" aria-describedby="register-username" autofocus="" tabindex="1" />
+                                        <input class="form-control" id="register-username" type="text" name="username" placeholder="johndoe" aria-describedby="register-username" autofocus="" tabindex="1" value="{{old('username')}}"/>
+                                        @error('username')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                     <div class="mb-1">
                                         <label class="form-label" for="register-email">Email</label>
-                                        <input class="form-control" id="register-email" type="text" name="register-email" placeholder="john@example.com" aria-describedby="register-email" tabindex="2" />
+                                        <input class="form-control" id="register-email" type="text" name="email" placeholder="john@example.com" aria-describedby="register-email" tabindex="2" value="{{old('email')}}"/>
+                                        @error('email')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                     <div class="mb-1">
                                         <label class="form-label" for="register-password">Password</label>
                                         <div class="input-group input-group-merge form-password-toggle">
-                                            <input class="form-control form-control-merge" id="register-password" type="password" name="register-password" placeholder="············" aria-describedby="register-password" tabindex="3" /><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
+                                            <input class="form-control form-control-merge" id="register-password" type="password" name="password" placeholder="············" aria-describedby="register-password" tabindex="3" /><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                                         </div>
+                                        @error('password')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-1">
+                                        <label class="form-label" for="phone">Phone</label>
+                                        <input class="form-control form-control-merge" id="phone" type="number" name="phone" placeholder="Phone" aria-describedby="Phone" tabindex="3" value="{{old('phone')}}"/>
+                                        @error('phone')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-1">
+                                        <label class="form-label" for="phone">Register As</label>
+                                        <select name="role" id="role" class="form-select">
+                                            <option value="student">Student</option>
+                                            <option value="teacher">Teacher</option>
+                                        </select>
                                     </div>
                                     <button class="btn btn-primary w-100" tabindex="5">Sign up</button>
                                 </form>

@@ -13,5 +13,6 @@ class UserDetail extends Model
         'user_id',
         'class_id',
         'phone',
+        'role'
     ];
 }

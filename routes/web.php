@@ -18,10 +18,15 @@ Route::get('/', function () {
     return view('welcome');
 })->name('login');
 
-Route::post('/login',[AuthController::class,'login']);
+Route::post('/login_action',[AuthController::class,'login']);
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', function () {
-        return view('home');
+    Route::group(['middleware' => 'is_teacher:teacher'], function () {
+        Route::get('/teacher', function () {
+            return view('teacher/dashboard');
+        });
+    });
+    Route::get('/student', function () {
+        return view('student/dashboard');
     });
 });
 
@@ -29,4 +34,5 @@ Route::get('/register', function () {
     return view('register');
 });
 
-Route::post('/register',[AuthController::class,'register']);
+Route::post('/register_action',[AuthController::class,'register']);
+Route::get('/logout',[AuthController::class,'logout']);

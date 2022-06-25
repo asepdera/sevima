@@ -25,6 +25,7 @@
         <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/core/menu/menu-types/vertical-menu.css")}}>
         <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/plugins/forms/form-validation.css")}}>
         <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/pages/authentication.css")}}>
+        <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/extensions/toastr.min.css">
         <!-- END: Page CSS-->
     </head>
     
@@ -63,7 +64,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <h2 class="brand-text text-primary ms-1">Vuexy</h2>
+                            <h2 class="brand-text text-primary ms-1">Ujian Digital</h2>
                         </a>
                         <!-- /Brand logo-->
                         <!-- Left Text-->
@@ -76,19 +77,25 @@
                             <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
                                 <h2 class="card-title fw-bold mb-1">Welcome to Ujian Digital! 👋</h2>
                                 <p class="card-text mb-2">Please sign-in to your account and start the exams</p>
-                                <form class="auth-login-form mt-2" action="{{url('/login')}}" method="POST">
+                                <form class="auth-login-form mt-2" action="{{url('/login_action')}}" method="POST">
                                     @csrf
                                     <div class="mb-1">
                                         <label class="form-label" for="login-email">Email</label>
-                                        <input class="form-control" id="login-email" type="text" name="login_email" placeholder="john@example.com" aria-describedby="login-email" autofocus="" tabindex="1" />
+                                        <input class="form-control" id="login-email" type="text" name="email" placeholder="john@example.com" aria-describedby="login-email" autofocus="" tabindex="1" />
+                                        @error('email')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                     <div class="mb-1">
                                         <div class="d-flex justify-content-between">
                                             <label class="form-label" for="login-password">Password</label>
                                         </div>
                                         <div class="input-group input-group-merge form-password-toggle">
-                                            <input class="form-control form-control-merge" id="login-password" type="password" name="login_password" placeholder="············" aria-describedby="login-password" tabindex="2" /><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
+                                            <input class="form-control form-control-merge" id="login-password" type="password" name="password" placeholder="············" aria-describedby="login-password" tabindex="2" /><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                                         </div>
+                                        @error('password')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                     <button class="btn btn-primary w-100" tabindex="4">Sign in</button>
                                 </form>
@@ -119,6 +126,7 @@
 
     <!-- BEGIN: Page JS-->
     <script src={{asset("app-assets/js/scripts/pages/auth-login.js")}}></script>
+    <script src={{asset("app-assets/vendors/js/extensions/toastr.min.js")}}></script>
     <!-- END: Page JS-->
 
     <script>
@@ -130,6 +138,16 @@
                 });
             }
         })
+        @if(session('error'))
+            setTimeout(function () {
+                toastr.error(
+                    "{{session('error')}}",
+                    {
+                        closeButton: true,
+                    }
+                );
+            }, 2000);
+        @endif
     </script>
 </body>
 <!-- END: Body-->
