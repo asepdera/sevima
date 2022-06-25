@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\UserDetail;
 use App\Models\Kelas;
 use App\Models\Work;
+use App\Models\Subject;
 
 class TeacherController extends Controller
 {
@@ -98,7 +99,58 @@ class TeacherController extends Controller
     }
 
     public function soal(){
-        $data['soal'] = Work::where('user_id', \Auth::user()->id)->get();
+        $data['soal'] = Work::join('class','class.id','=','works.class_id')
+            ->where('works.user_id', \Auth::user()->id)
+            ->select('works.id', 'works.name', 'works.status', 'class.name as class_name', 'works.created_at',)
+            ->get();
         return view('teacher/soal', $data);
+    }
+
+    public function add_soal(){
+        $validation = $this->validate(request(), [
+            'name' => 'required|string|max:255',
+            'class_id' => 'required|integer',
+        ]);
+
+        $work = new Work;
+        $work->name = request('name');
+        $work->user_id = \Auth::user()->id;
+        $work->class_id = request('class_id');
+        $work->save();
+        return redirect('/teacher/soal');
+    }
+
+    public function delete_soal($id){
+        $work = Work::find($id);
+        $work->delete();
+        return redirect('/teacher/soal');
+    }
+
+    public function edit_soal($id){
+        try {
+            $work = Work::join('class','class.id','=','works.class_id')
+                ->join('subjects','subjects.id','=','works.subject_id')
+                ->where('works.id', $id)
+                ->select(
+                    'works.id', 
+                    'works.name', 
+                    'works.status', 
+                    'class.id as class_id',
+                    'class.name as class_name',
+                    'works.created_at',
+                    'works.file',
+                    'subjects.name as subject_name',
+                    'subjects.id as subject_id'
+                )
+                ->get();
+            $kelas = Kelas::where('user_id', \Auth::user()->id)->get();
+            $subject = Subject::where('user_id', \Auth::user()->id)->get();
+            $data['work'] = $work;
+            $data['kelas'] = $kelas;
+            $data['subject'] = $subject;
+        } catch (\Exception $e) {
+            return response()->json($e);
+        }
+        return response()->json($data);
     }
 }

@@ -20,7 +20,8 @@ return new class extends Migration
             $table->unsignedBigInteger('class_id');
             $table->unsignedBigInteger('subject_id');
             $table->enum('status',['closed','published'])->default('published');
-            $table->string('file');
+            $table->string('file')->nullable();
+            $table->string('description');
             $table->timestamps();
         });
     }

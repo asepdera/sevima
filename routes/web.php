@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/kelas/update/', [TeacherController::class, 'update_kelas']);
         Route::get('/kelas/edit/{id}', [TeacherController::class, 'edit_kelas']);
         Route::delete('/kelas/delete/{id}', [TeacherController::class, 'delete_kelas']);
+        Route::get('/soal/edit/{id}', [TeacherController::class, 'edit_soal']);
     });
     Route::group(['middleware' => 'is_teacher:student', 'prefix' => 'student'], function () {
         Route::get('/', [StudentsController::class, 'dashboard']);
