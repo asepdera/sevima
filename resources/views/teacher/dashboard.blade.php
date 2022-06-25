@@ -53,10 +53,12 @@
                                             <td>{{$loop->iteration}}</td>
                                             <td>
                                                 <span class="avatar mr-1">
-                                                    @if ($st->images)
+                                                    @if ($st->images != null)
                                                         <img src="{{asset('upload/'.$st->images)}}" alt="profile" height="40" width="40">
+                                                    @else
+                                                        <img src="{{asset('upload/no-user.png')}}" alt="profile" height="40" width="40">
                                                     @endif
-                                                    <img src="{{asset('upload/no-user.png')}}" alt="profile" height="40" width="40">
+                                                    
                                                 </span>
                                                 <span>{{$st->name}}</span>
                                             </td>

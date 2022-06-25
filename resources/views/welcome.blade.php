@@ -64,7 +64,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <h2 class="brand-text text-primary ms-1">Ujian Digital</h2>
+                            <h2 class="brand-text text-primary ms-1">Assignment</h2>
                         </a>
                         <!-- /Brand logo-->
                         <!-- Left Text-->
@@ -75,7 +75,7 @@
                         <!-- Login-->
                         <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                             <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                                <h2 class="card-title fw-bold mb-1">Welcome to Ujian Digital! 👋</h2>
+                                <h2 class="card-title fw-bold mb-1">Welcome to Assignment! 👋</h2>
                                 <p class="card-text mb-2">Please sign-in to your account and start the exams</p>
                                 <form class="auth-login-form mt-2" action="{{url('/login_action')}}" method="POST">
                                     @csrf

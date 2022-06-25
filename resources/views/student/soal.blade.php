@@ -60,7 +60,7 @@
                         <th>No</th>
                         <th>Name</th>
                         <th>Complete In</th>
-                        <th>Action</th>
+                        <th>Status</th>
                     </thead>
                     <tbody>
                         @if ($complete == null)

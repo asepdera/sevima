@@ -72,7 +72,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <h2 class="brand-text text-primary ms-1">Ujian Digital</h2>
+                            <h2 class="brand-text text-primary ms-1">Assignment</h2>
                         </a>
                         <!-- /Brand logo-->
                         <!-- Left Text-->
@@ -84,7 +84,7 @@
                         <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                             <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
                                 <h2 class="card-title fw-bold mb-1">Adventure starts here 🚀</h2>
-                                <p class="card-text mb-2">Make your exam easy and fun!</p>
+                                <p class="card-text mb-2">Make your assignment easy and fun!</p>
                                 <form class="auth-register-form mt-2" action="{{url('/register_action')}}" method="POST">
                                     @csrf
                                     <div class="mb-1">
