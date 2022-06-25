@@ -49,7 +49,7 @@
         <div class="navbar-container d-flex content">
             <ul class="nav navbar-nav align-items-center ms-auto">
                 <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="user-nav d-sm-flex d-none"><span class="user-name fw-bolder">John Doe</span><span class="user-status">Admin</span></div><span class="avatar"><img class="round" src="app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
+                        <div class="user-nav d-sm-flex d-none"><span class="user-name fw-bolder">@yield('name')</span><span class="user-status">@yield('role')</span></div><span class="avatar"><img class="round" src="app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
                         <a class="dropdown-item" href="{{url("/profile/".auth()->user()->id)}}"><i class="me-50" data-feather="user"></i> Profile</a>
@@ -104,7 +104,16 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                @yield('sidebar')
+                <li class=" nav-item"><a class="d-flex align-items-center" href="{{url('/teacher')}}"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="File Manager">Dashboard</span></a>
+                </li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/teacher/kelas')}}"><i data-feather="server"></i><span class="menu-item text-truncate" data-i18n="Permission">Class</span></a>
+                </li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/teacher/soal')}}"><i data-feather="file-text"></i><span class="menu-item text-truncate" data-i18n="Permission">Questions</span></a>
+                </li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/teacher/subject')}}"><i data-feather="file"></i><span class="menu-item text-truncate" data-i18n="Permission">Subjects</span></a>
+                </li>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="{{url('teacher/backup')}}"><i data-feather="folder"></i><span class="menu-title text-truncate" data-i18n="File Manager">Backup</span></a>
+                </li>
             </ul>
         </div>
     </div>
@@ -118,14 +127,11 @@
             <div class="content-header row">
             </div>
             <div class="content-body">
-                <!-- Dashboard Ecommerce Starts -->
                 <section id="dashboard-ecommerce">
                     <div class="row match-height">
                         @yield('content')
                     </div>
                 </section>
-                <!-- Dashboard Ecommerce ends -->
-
             </div>
         </div>
     </div>
@@ -136,7 +142,7 @@
 
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
-        <p class="clearfix mb-0"><span class="float-md-start d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2021<a class="ms-25" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a><span class="d-none d-sm-inline-block">, All rights Reserved</span></span><span class="float-md-end d-none d-md-block">Hand-crafted & Made with<i data-feather="heart"></i></span></p>
+        <p class="clearfix mb-0"><span class="float-md-start d-block d-md-inline-block mt-25"><a class="ms-25" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Ujian Digital</a></span><span class="float-md-end d-none d-md-block">Hand-crafted & Made with<i data-feather="heart"></i></span></p>
     </footer>
     <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
     <!-- END: Footer-->
@@ -155,10 +161,6 @@
     <script src={{asset("app-assets/js/core/app-menu.js")}}></script>
     <script src={{asset("app-assets/js/core/app.js")}}></script>
     <!-- END: Theme JS-->
-
-    <!-- BEGIN: Page JS-->
-    {{-- <script src={{asset("app-assets/js/scripts/pages/dashboard-ecommerce.js")}}></script> --}}
-    <!-- END: Page JS-->
 
     <script>
         $(window).on('load', function() {

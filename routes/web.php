@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\StudentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +23,10 @@ Route::get('/', function () {
 Route::post('/login_action',[AuthController::class,'login']);
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'is_teacher:teacher'], function () {
-        Route::get('/teacher', function () {
-            return view('teacher/dashboard');
-        });
+        Route::get('/teacher', [TeacherController::class, 'dashboard']);
     });
-    Route::get('/student', function () {
-        return view('student/dashboard');
+    Route::group(['middleware' => 'is_teacher:student'], function () {
+        Route::get('/student', [StudentsController::class, 'dashboard']);
     });
 });
 

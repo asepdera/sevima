@@ -20,7 +20,7 @@ class AuthController extends Controller
             return redirect()->intended('teacher');
         } else if(\Auth::attempt($credentials) && \Auth::user()->role == 'student') {
             return redirect()->intended('student');
-        }
+        } 
 
         return redirect()->back()->with('error', 'These credentials do not match our records.',);
     }
