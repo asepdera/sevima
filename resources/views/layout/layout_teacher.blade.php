@@ -35,6 +35,7 @@
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    @yield('css')
     <!-- END: Custom CSS-->
 
 </head>
@@ -168,6 +169,7 @@
     <script src={{asset("app-assets/js/core/app.js")}}></script>
     <!-- END: Theme JS-->
 
+    @yield('script')
     <script>
         $(window).on('load', function() {
             if (feather) {

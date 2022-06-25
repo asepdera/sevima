@@ -22,17 +22,22 @@ Route::get('/', function () {
 
 Route::post('/login_action',[AuthController::class,'login']);
 Route::group(['middleware' => 'auth'], function () {
-    Route::group(['middleware' => 'is_teacher:teacher'], function () {
-        Route::get('/teacher', [TeacherController::class, 'dashboard']);
-        Route::get('/teacher/work', [TeacherController::class, 'work']);
-        Route::get('/teacher/work/{id}', [TeacherController::class, 'work_detail']);
-        Route::post('/teacher/work/create', [TeacherController::class, 'work_store']);
-        Route::post('/teacher/work/update/{id}', [TeacherController::class, 'work_update']);
-        Route::post('/teacher/work/delete/{id}', [TeacherController::class, 'work_delete']);
-        Route::get('/teacher/students', [TeacherController::class, 'students']);
+    Route::group(['middleware' => 'is_teacher:teacher', 'prefix' => 'teacher'], function () {
+        Route::get('/', [TeacherController::class, 'dashboard']);
+        Route::get('/soal', [TeacherController::class, 'soal']);
+        Route::get('/soal/{id}', [TeacherController::class, 'soal_detail']);
+        Route::post('/soal/create', [TeacherController::class, 'soal_store']);
+        Route::post('/soal/update/{id}', [TeacherController::class, 'soal_update']);
+        Route::post('/soal/delete/{id}', [TeacherController::class, 'soal_delete']);
+        Route::get('/students', [TeacherController::class, 'students']);
+        Route::get('/kelas', [TeacherController::class, 'kelas']);
+        Route::post('/kelas/add', [TeacherController::class, 'add_kelas']);
+        Route::post('/kelas/update/', [TeacherController::class, 'update_kelas']);
+        Route::get('/kelas/edit/{id}', [TeacherController::class, 'edit_kelas']);
+        Route::delete('/kelas/delete/{id}', [TeacherController::class, 'delete_kelas']);
     });
-    Route::group(['middleware' => 'is_teacher:student'], function () {
-        Route::get('/student', [StudentsController::class, 'dashboard']);
+    Route::group(['middleware' => 'is_teacher:student', 'prefix' => 'student'], function () {
+        Route::get('/', [StudentsController::class, 'dashboard']);
     });
 });
 
