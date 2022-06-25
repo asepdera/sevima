@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('work_id');
             $table->string('file');
+            $table->string('status');
             $table->timestamps();
         });
     }

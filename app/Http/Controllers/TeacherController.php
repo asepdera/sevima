@@ -248,4 +248,46 @@ class TeacherController extends Controller
         $subject->save();
         return redirect('/teacher/subject');
     }
+
+    public function profile(){
+        $data['user'] = User::join('user_details','user_details.user_id','=','users.id')
+            ->where('users.id', \Auth::user()->id)
+            ->select('users.id', 'users.name', 'users.email', 'user_details.phone', 'user_details.images')
+            ->get();
+        return view('teacher/profile', $data);
+    }
+
+    public function profile_update(){
+        $validation = $this->validate(request(), [
+            'name' => 'required|string|max:255',
+            'phone' => 'required|max:15',
+            'files' => 'max:10000',
+            'email' => 'required|email',
+        ]);
+        
+        $users = UserDetail::where('user_id', \Auth::user()->id)->first();
+        $user = User::find(\Auth::user()->id);
+        // dd($users);
+        //delete old file
+        $user->name = request('name');
+        $users->user_id = \Auth::user()->id;
+        $users->phone = request('phone');
+        $user->email = request('email');
+        $file = request()->file('files');
+        if ($file) {
+            $filed = $users->images;
+
+            if($filed){
+                unlink(public_path('/user/'.$filed));
+            }
+            $file_name = time().'.'.$file->extension();
+        
+            $file->move(public_path('/user'), $file_name);
+            $users->images = $file_name;
+        }
+
+        $user->update();
+        $users->update();
+        return redirect('/teacher/profile');
+    }
 }

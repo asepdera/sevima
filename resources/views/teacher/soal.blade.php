@@ -203,7 +203,6 @@
         </div>
 @endsection
 @section('script')
-    <script src={{asset("app-assets/vendors/js/file-uploaders/dropzone.min.js")}}></script>
     <script>
         function edit(id){
             $.ajax({

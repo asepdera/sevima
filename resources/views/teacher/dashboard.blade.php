@@ -74,7 +74,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Student Assignment</h3>
-                    <a class="btn btn-primary btn-sm" href="">See All -></a>
+                    <a class="btn btn-primary btn-sm" href="{{url('/teacher/soal')}}">See All -></a>
                 </div>
                 <div class="card-body">
                     <div class="overflow-x-scroll" style="overflow-y: hidden !important;">

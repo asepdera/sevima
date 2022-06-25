@@ -40,9 +40,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/soal/edit/{id}', [TeacherController::class, 'edit_soal']);
         Route::get('/subject/edit/{id}', [TeacherController::class, 'edit_subject']);
         Route::get('/subject',[TeacherController::class,'subject']);
+        Route::get('/profile',[TeacherController::class,'profile']);
+        Route::post('/profile/update/',[TeacherController::class,'profile_update']);
     });
     Route::group(['middleware' => 'is_teacher:student', 'prefix' => 'student'], function () {
         Route::get('/', [StudentsController::class, 'dashboard']);
+        Route::get('/soal', [StudentsController::class, 'soal']);
+        Route::get('/soal/download/{id}', [StudentsController::class, 'download']);
+        Route::get('/profile', [StudentsController::class, 'profile']);
+        Route::post('/profile/update/',[StudentsController::class,'profile_update']);
+        Route::get('/soal/edit/{id}', [StudentsController::class, 'view_soal']);
+        Route::post('/soal/submit/', [StudentsController::class, 'submit_soal']);
     });
 });
 

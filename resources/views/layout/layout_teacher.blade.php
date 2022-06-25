@@ -57,7 +57,7 @@
                         <div class="user-nav dflex"><span class="user-name fw-bolder">@yield('name')</span><span class="user-status">@yield('role')</span></div><span class="avatar"><img class="round" src={{asset("app-assets/images/portrait/small/avatar-s-11.jpg")}} alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
-                        <a class="dropdown-item" href="{{url("/profile/".auth()->user()->id)}}"><i class="me-50" data-feather="user"></i> Profile</a>
+                        <a class="dropdown-item" href="{{url('/teacher/profile')}}"><i class="me-50" data-feather="user"></i> Profile</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{url('/logout')}}"><i class="me-50" data-feather="power"></i> Logout</a>
                     </div>
@@ -119,8 +119,6 @@
                 </li>
                 <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/teacher/subject')}}"><i data-feather="file"></i><span class="menu-item text-truncate">Subjects</span></a>
                 </li>
-                <li class=" nav-item"><a class="d-flex align-items-center" href="{{url('teacher/backup')}}"><i data-feather="folder"></i><span class="menu-title text-truncate">Backup</span></a>
-                </li>
             </ul>
         </div>
     </div>
@@ -149,7 +147,7 @@
 
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
-        <p class="clearfix mb-0"><span class="float-md-start d-block d-md-inline-block mt-25"><a class="ms-25" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Ujian Digital</a></span><span class="float-md-end d-none d-md-block">Hand-crafted & Made with<i data-feather="heart"></i></span></p>
+        <p class="clearfix mb-0"><span class="float-md-start d-block d-md-inline-block mt-25">Assignment</span><span class="float-md-end d-none d-md-block">Hand-crafted & Made with<i data-feather="heart"></i></span></p>
     </footer>
     <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
     <!-- END: Footer-->
