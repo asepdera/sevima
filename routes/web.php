@@ -24,6 +24,12 @@ Route::post('/login_action',[AuthController::class,'login']);
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'is_teacher:teacher'], function () {
         Route::get('/teacher', [TeacherController::class, 'dashboard']);
+        Route::get('/teacher/work', [TeacherController::class, 'work']);
+        Route::get('/teacher/work/{id}', [TeacherController::class, 'work_detail']);
+        Route::post('/teacher/work/create', [TeacherController::class, 'work_store']);
+        Route::post('/teacher/work/update/{id}', [TeacherController::class, 'work_update']);
+        Route::post('/teacher/work/delete/{id}', [TeacherController::class, 'work_delete']);
+        Route::get('/teacher/students', [TeacherController::class, 'students']);
     });
     Route::group(['middleware' => 'is_teacher:student'], function () {
         Route::get('/student', [StudentsController::class, 'dashboard']);

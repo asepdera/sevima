@@ -9,7 +9,6 @@ use App\Models\UserDetail;
 class AuthController extends Controller
 {
     public function login(Request $request){
-        //validation with redirect
         $validate = $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required|min:5'
@@ -31,7 +30,7 @@ class AuthController extends Controller
         $password = bcrypt($request->input('password'));
         $phone = $request->input('phone');
         $role = $request->input('role');
-
+        
         $validate = $this->validate($request, [
             'email' => 'required|email|unique:users',
             'password' => 'required|min:5',

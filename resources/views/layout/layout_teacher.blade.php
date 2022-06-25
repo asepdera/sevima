@@ -7,30 +7,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
     <title>@yield('title')</title>
-    <link rel="apple-touch-icon" href="app-assets/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.ico">
+    <link rel="apple-touch-icon" href={{asset("app-assets/images/ico/apple-icon-120.png")}}>
+    <link rel="shortcut icon" type="image/x-icon" href={{asset("app-assets/images/ico/favicon.ico")}}>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/charts/apexcharts.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/extensions/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href={{asset("app-assets/vendors/css/vendors.min.css")}}>
+    <link rel="stylesheet" type="text/css" href={{asset("app-assets/vendors/css/charts/apexcharts.css")}}>
+    <link rel="stylesheet" type="text/css" href={{asset("app-assets/vendors/css/extensions/toastr.min.css")}}>
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/colors.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/components.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/dark-layout.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/bordered-layout.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/semi-dark-layout.css">
+    <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/bootstrap.css")}}>
+    <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/bootstrap-extended.css")}}>
+    <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/colors.css")}}>
+    <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/components.css")}}>
+    <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/themes/dark-layout.css")}}>
+    <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/themes/bordered-layout.css")}}>
+    <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/themes/semi-dark-layout.css")}}>
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/pages/dashboard-ecommerce.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/charts/chart-apex.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/extensions/ext-component-toastr.css">
+    <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/core/menu/menu-types/vertical-menu.css")}}>
+    <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/pages/dashboard-ecommerce.css")}}>
+    <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/plugins/charts/chart-apex.css")}}>
+    <link rel="stylesheet" type="text/css" href={{asset("app-assets/css/plugins/extensions/ext-component-toastr.css")}}>
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -46,10 +46,14 @@
 
     <!-- BEGIN: Header-->
     <nav class="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow container-xxl">
-        <div class="navbar-container d-flex content">
+        <div class="navbar-container d-flex content align-items-center">
+            <ul class="nav navbar-nav d-xl-none">
+                <li class="nav-item"><a class="nav-link menu-toggle" href="#"><i class="ficon"
+                            data-feather="menu"></i></a></li>
+            </ul>
             <ul class="nav navbar-nav align-items-center ms-auto">
                 <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="user-nav d-sm-flex d-none"><span class="user-name fw-bolder">@yield('name')</span><span class="user-status">@yield('role')</span></div><span class="avatar"><img class="round" src="app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
+                        <div class="user-nav dflex"><span class="user-name fw-bolder">@yield('name')</span><span class="user-status">@yield('role')</span></div><span class="avatar"><img class="round" src={{asset("app-assets/images/portrait/small/avatar-s-11.jpg")}} alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
                         <a class="dropdown-item" href="{{url("/profile/".auth()->user()->id)}}"><i class="me-50" data-feather="user"></i> Profile</a>
@@ -72,7 +76,7 @@
     <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item me-auto"><a class="navbar-brand" href="html/ltr/vertical-menu-template-semi-dark/index.html"><span class="brand-logo">
+                <li class="nav-item me-auto"><a class="navbar-brand" href={{url('/teacher')}}><span class="brand-logo">
                             <svg viewbox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="24">
                                 <defs>
                                     <lineargradient id="linearGradient-1" x1="100%" y1="10.5120544%" x2="50%" y2="89.4879456%">
@@ -96,7 +100,7 @@
                                     </g>
                                 </g>
                             </svg></span>
-                        <h2 class="brand-text">Ujian Digital</h2>
+                        <h4 class="text-primary" style="margin-left: 4px !important">Assignment</h4>
                     </a></li>
                 <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pe-0" data-bs-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
             </ul>
@@ -104,15 +108,17 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class=" nav-item"><a class="d-flex align-items-center" href="{{url('/teacher')}}"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="File Manager">Dashboard</span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="{{url('/teacher')}}"><i data-feather="home"></i><span class="menu-title text-truncate">Dashboard</span></a>
                 </li>
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/teacher/kelas')}}"><i data-feather="server"></i><span class="menu-item text-truncate" data-i18n="Permission">Class</span></a>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/teacher/students')}}"><i data-feather="users"></i><span class="menu-item text-truncate">Students</span></a>
                 </li>
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/teacher/soal')}}"><i data-feather="file-text"></i><span class="menu-item text-truncate" data-i18n="Permission">Questions</span></a>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/teacher/kelas')}}"><i data-feather="server"></i><span class="menu-item text-truncate">Class</span></a>
                 </li>
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/teacher/subject')}}"><i data-feather="file"></i><span class="menu-item text-truncate" data-i18n="Permission">Subjects</span></a>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/teacher/soal')}}"><i data-feather="file-text"></i><span class="menu-item text-truncate">Student Assignment</span></a>
                 </li>
-                <li class=" nav-item"><a class="d-flex align-items-center" href="{{url('teacher/backup')}}"><i data-feather="folder"></i><span class="menu-title text-truncate" data-i18n="File Manager">Backup</span></a>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/teacher/subject')}}"><i data-feather="file"></i><span class="menu-item text-truncate">Subjects</span></a>
+                </li>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="{{url('teacher/backup')}}"><i data-feather="folder"></i><span class="menu-title text-truncate">Backup</span></a>
                 </li>
             </ul>
         </div>

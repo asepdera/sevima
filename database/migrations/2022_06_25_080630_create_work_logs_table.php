@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('class_teachers', function (Blueprint $table) {
+        Schema::create('work_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('class_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('work_id');
+            $table->string('file');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('class_teachers');
+        Schema::dropIfExists('work_logs');
     }
 };
